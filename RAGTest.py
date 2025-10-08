@@ -1,3 +1,5 @@
+from VectorEmbeddings import initializedembeddings
+
 def pagestester(pages):
     #See what information is on the 1st page
     print("FIRST PAGE METADATA")
@@ -25,11 +27,12 @@ def pagestester(pages):
             
             # Want to see page 2? Just change the number below!
             page_number = 1 
-            print("=" * 50)
             print(f"VIEWING PAGE {page_number + 1}")
             print("=" * 50)
-            print(pages[page_number].page_content[:500]) 
-            print("...\n")
+            print(pages[page_number].page_content[:500])
+            print("\n")
+    
+    initializedembeddings(pages)
 
 
 # Exercise 4: Save first page to a text file
