@@ -1,7 +1,3 @@
-from langchain_community.document_loaders import PyPDFLoader
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
-
 def pagestester(pages):
     #See what information is on the 1st page
     print("FIRST PAGE METADATA")
