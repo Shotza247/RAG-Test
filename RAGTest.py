@@ -16,7 +16,7 @@ def pagestester(pages):
     print("\n")
         
     # Search for a specific word
-    print("SEARCHING FOR 'React' IN ALL PAGES")
+    print("Simple word searching for 'React' in all pages")
     print("=" * 50)
     search_word = "React"
         
