@@ -1,41 +1,34 @@
 from VectorEmbeddings import initializedembeddings
 
 def pagestester(pages):
-    #See what information is on the 1st page
-    print("FIRST PAGE METADATA")
+    """Process pages and return vectorstore"""
+    print("\n" + "=" * 50)
+    print("ANALYZING PDF CONTENT")
     print("=" * 50)
+    
+    #display metadata from first page
+    print("\nFirst Page Metadata:")
     print(pages[0].metadata)
-    print("\n")
     
-    #Loop through all pages and print summary info
-    print("ALL PAGES SUMMARY")
-    print("=" * 50)
+    #summary of all pages within the pdf doc
+    print(f"\nTotal Pages: {len(pages)}")
+    print("-" * 50)
     
+    total_chars = 0
     for i, page in enumerate(pages):
-        print(f"Page {i + 1}: {len(page.page_content)} characters")
-    print("\n")
-        
-    # Search for a specific word
-    print("Simple word searching for 'React' in all pages")
-    print("=" * 50)
-    search_word = "React"
-        
-    for i, page in enumerate(pages):
-        if search_word in page.page_content:
-            print(f"✓ Found '{search_word}' on page {i + 1}")
-            print("\n")
-            
-            # Want to see page 2? Just change the number below!
-            page_number = 1 
-            print(f"VIEWING PAGE {page_number + 1}")
-            print("=" * 50)
-            print(pages[page_number].page_content[:500])
-            print("\n")
+        char_count = len(page.page_content)
+        total_chars += char_count
+        print(f"Page {i + 1}: {char_count:,} characters")
     
-    initializedembeddings(pages)
-
-
-# Exercise 4: Save first page to a text file
-# with open("first_page.txt", "w", encoding="utf-8") as f:
-#     f.write(pages[0].page_content)
-# print("Saved first page to first_page.txt")
+    print(f"\nTotal content: {total_chars:,} characters")
+    
+    #simple search for demonstration
+    print("\n" + "=" * 50)
+    print("SAMPLE CONTENT PREVIEW (First 300 chars of page 1)")
+    print(pages[0].page_content[:300] + "...\n")
+    
+    # Initialize embeddings and return vectorstore
+    print("INITIALIZING VECTOR STORE")
+    vectorstore = initializedembeddings(pages)
+    
+    return vectorstore
