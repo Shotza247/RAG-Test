@@ -1,4 +1,5 @@
 from VectorEmbeddings import initializedembeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 def pagestester(pages):
     """Process pages and return vectorstore"""
@@ -27,8 +28,15 @@ def pagestester(pages):
     print("SAMPLE CONTENT PREVIEW (First 300 chars of page 1)")
     print(pages[0].page_content[:300] + "...\n")
     
+    text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,        
+    chunk_overlap=100      
+    )
+    
+    chunks = text_splitter.split_documents(pages) 
+    
     # Initialize embeddings and return vectorstore
     print("INITIALIZING VECTOR STORE")
-    vectorstore = initializedembeddings(pages)
+    vectorstore = initializedembeddings(chunks)
     
     return vectorstore
