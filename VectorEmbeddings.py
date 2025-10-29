@@ -9,7 +9,7 @@ print("Loading text-generation model...")
 qa_pipeline = pipeline(
     "text-generation",
     model="mistralai/Mistral-7B-Instruct-v0.2",
-    torch_dtype="auto",
+    dtype="auto",
     device_map="auto",
     max_new_tokens=512
 )
@@ -64,9 +64,8 @@ def semantic_search(vectorstore, query, k=8, top_k=3):
     print("\n" + "=" * 50)
     return top_results
 
-
 #We then ask the LLM with High-Confidence Context
-def ask_llm(vectorstore, question):
+def ask_llm(results, question):
     print("\n" + "=" * 50)
     print("LLM ANSWER")
     print("=" * 50)
@@ -74,7 +73,7 @@ def ask_llm(vectorstore, question):
     print("-" * 50)
 
     # Retrieve and re-rank top documents
-    results = semantic_search(vectorstore, question, k=8, top_k=3)
+    #results = semantic_search(vectorstore, question, k=8, top_k=3)
     avg_confidence = sum(score for _, score in results) / len(results)
 
     # Warn on low average confidence
