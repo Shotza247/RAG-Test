@@ -24,10 +24,10 @@ if vectorstore:
             print("Please enter a valid query.")
             continue
         
-        # Perform semantic search
-        semantic_search(vectorstore, query, top_k=3)
+        #lets perform semantic search
+        top_results = semantic_search(vectorstore, query, top_k=3)
         
         # Get LLM answer
-        ask_llm(vectorstore, query)
+        ask_llm(top_results, query)
 else:
     print("Failed to load PDF. Exiting...")
